@@ -17,6 +17,20 @@ spec:
         image: postgres
         ports:
           - containerPort: 5432
+        volumeMounts:
+          - name: postgres-storage
+            mountPath: /var/lib/postgresql/data # default storage location postgres
+            subPath: postgres # path inside the Persistent volumen
+        volumes:
+          - name: postgres-storage
+            persistentVolumeClaim:
+              claimName: database-persistent-volume-claim
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgpassword
+                key: POSTGRES_PASSWORD
         envFrom:
         - configMapRef:
             name: postgres-config            
