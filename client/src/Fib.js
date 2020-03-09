@@ -35,7 +35,6 @@ class Fib extends Component {
   };
 
   renderSeenIndexes() {
-    console.log(this.state.seenIndexes);
     return this.state.seenIndexes.map(({ number }) => number).join(', ');
   }
 
@@ -59,7 +58,7 @@ class Fib extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>Enter your index:</label>
           <input
-            value={this.state.index}
+            value={ts.state.index}
             onChange={event => this.setState({ index: event.target.value })}
           />
           <button>Submit</button>
