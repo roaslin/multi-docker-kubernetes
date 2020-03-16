@@ -21,7 +21,6 @@ spec:
           - name: postgres-storage
             mountPath: /var/lib/postgresql/data # default storage location postgres
             subPath: postgres # path inside the Persistent volumen
-
         env:
           - name: POSTGRES_PASSWORD
             valueFrom:
@@ -35,12 +34,3 @@ spec:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: database-persistent-volume-claim
---- # Postgres needs that property to work due to latest version changes
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-config
-  labels:
-    component: configs
-data:
-  POSTGRES_HOST_AUTH_METHOD: trust
